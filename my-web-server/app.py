@@ -9,12 +9,17 @@ import requests
 app = Flask(__name__)
 
 def get_location_from_ip(ip):
-    response = requests.get(f'http://ip-api.com/json/{ip}')
-    return response.json().get('city')
+    locationiq_api_key = 'pk.54aee61604854ee6aa9afda8dc076cbf'
+    response = requests.get(f'https://us1.locationiq.com/v1/search?key={locationiq_api_key}&q={ip}&format=json')
+    data = response.json()
+    if data:
+        city = data[0].get('display_name', '').split(',')[0]
+        return city
+    return None
 
 def get_temperature(city):
-    api_key = 'YOUR_WEATHER_API_KEY'  # Replace with your actual weather API key
-    response = requests.get(f'http://api.weatherstack.com/current?access_key={api_key}&query={city}')
+    api_key = 169d8032d56c4d0b937213455240207
+    response = requests.get(f'http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}')
     return response.json().get('current', {}).get('temperature')
 
 @app.route('/api/hello', methods=['GET'])
