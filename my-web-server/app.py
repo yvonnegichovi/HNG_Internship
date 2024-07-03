@@ -5,11 +5,16 @@ This module creates a basic web server using Flask
 
 from flask import Flask, request, jsonify
 import requests
+import os
 
 app = Flask(__name__)
 
+
+locationiq_api_key = os.getenv('LOCATIONIQ_API_KEY')
+weatherapi_key = os.getenv('WEATHERAPI_KEY')
+
+
 def get_location_from_ip(ip):
-    locationiq_api_key = 'pk.54aee61604854ee6aa9afda8dc076cbf'
     response = requests.get(f'https://us1.locationiq.com/v1/reverse.php?key={locationiq_api_key}&lat=LATITUDE&lon=LONGITUDE&format=json')
     data = response.json()
     if data:
@@ -18,7 +23,6 @@ def get_location_from_ip(ip):
     return None
 
 def get_temperature(city):
-    api_key = '169d8032d56c4d0b937213455240207'
     response = requests.get(f'http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}')
     return response.json().get('current', {}).get('temp_c')
 
