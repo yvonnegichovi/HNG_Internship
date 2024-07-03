@@ -22,15 +22,6 @@ email-validator==2.1.1
 entrypoints==0.3
 flasgger==0.9.7.1
 Flask==2.0.3
-Flask-Babel==2.0.0
-Flask-Bcrypt==1.0.1
-Flask-Cors==4.0.0
-Flask-Login==0.6.3
-Flask-Mail==0.9.1
-Flask-Migrate==4.0.7
-flask-sqlalchemy==3.1.1
-Flask-SSLify==0.1.5
-flask-wtf==1.2.1
 frozenlist==1.4.1
 GeoAlchemy2==0.15.0
 geographiclib==2.0
