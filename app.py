@@ -14,7 +14,7 @@ ipstack_api_key = os.getenv('IPSTACK_API_KEY')
 weatherapi_key = os.getenv('WEATHERAPI_KEY')
 
 def get_location_from_ip(ip):
-    response = requests.get(f'http://api.ipstack.com/{ipstack_api_key}?access_key={ipstack_access_key}')
+    response = requests.get(f'http://api.ipstack.com/{ip}?access_key={ipstack_api_key}')
     data = response.json()
     if data:
         city = data.get('city', 'Unknown City')
@@ -22,7 +22,7 @@ def get_location_from_ip(ip):
     return None
 
 def get_temperature(city):
-    response = requests.get(f'http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}')
+    response = requests.get(f'http://api.weatherapi.com/v1/current.json?key={weatherapi_key}&q={city}')
     return response.json().get('current', {}).get('temp_c')
 
 @app.route('/api/hello', methods=['GET'])
