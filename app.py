@@ -10,15 +10,14 @@ import os
 app = Flask(__name__)
 
 
-locationiq_api_key = os.getenv('LOCATIONIQ_API_KEY')
+ipstack_api_key = os.getenv('IPSTACK_API_KEY')
 weatherapi_key = os.getenv('WEATHERAPI_KEY')
 
-
 def get_location_from_ip(ip):
-    response = requests.get(f'https://us1.locationiq.com/v1/reverse.php?key={locationiq_api_key}&lat=LATITUDE&lon=LONGITUDE&format=json')
+    response = requests.get(f'http://api.ipstack.com/{ipstack_api_key}?access_key={ipstack_access_key}')
     data = response.json()
     if data:
-        city = data[0].get('display_name', '').split(',')[0]
+        city = data.get('city', 'Unknown City')
         return city
     return None
 
