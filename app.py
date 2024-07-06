@@ -28,7 +28,7 @@ def get_temperature(city):
 @app.route('/api/hello', methods=['GET'])
 def hello():
     visitor_name = request.args.get('visitor_name', 'Guest')
-    client_ip = request.remote_addr
+    client_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
 
     try:
         location = get_location_from_ip(client_ip)
